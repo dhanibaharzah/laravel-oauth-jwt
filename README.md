@@ -27,37 +27,6 @@ Save the `.env` file then back to terminal to start the server
 ```sh
 $ php artisan serve
 ```
-
-# How to setup Postman
-
-1. Import the postman.json into Postman App
-2. Configure the environtment variables: 
-    on local -> {{URL}} `http://localhost:8000/api` | {{bearer}} `Bearer {put-token-here}`
-    on development -> {{URL}} `https://api.quantumdigitech.com/bc/api` | {{bearer}} `Bearer {put-token-here}`
-3. Get the token bearer by register, hit register endpoint on folder AUTHENTICATION/register, after get token, put the token into environment variables in `bearer`
-
-
-# How to start task
-
-```sh
-$ cd (root)
-$ git pull origin development
-```
-
-# Rules to create branch feature
-```sh
-$ cd (root)
-$ git checkout -b feature/{name-feature}
-```
-
-# How to finish task or push in progress
-
-```sh
-$ cd (root)
-$ git push origin feature/{name-feature}
-```
-
-
 ---
 
 ## About Laravel
