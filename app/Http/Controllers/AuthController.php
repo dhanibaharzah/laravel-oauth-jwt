@@ -84,4 +84,12 @@ class AuthController extends Controller
             'message' => 'You have been successfully logged out',
         ], 200);
     }
+
+    public function check()
+    {
+        return response([
+            'status' => 200,
+            'message' => 'Laravel is working fine...',
+        ], 200);
+    }
 }
