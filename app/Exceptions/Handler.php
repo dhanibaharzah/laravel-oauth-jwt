@@ -50,10 +50,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // return parent::render($request, $exception);
-        return response([
-            'status' => 401,
-            'message' => 'Unauthorized',
-        ], 401);
+        return parent::render($request, $exception);
+        //return response([
+        //   'status' => 401,
+        //   'message' => 'Unauthorized',
+        //], 401);
     }
 }
