@@ -50,10 +50,28 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+            if ($exception->getStatusCode() == 404) {
+                return response([
+                    'status' => 404,
+                    'message' => 'Not Found Exception'
+                ], 404);
+            }
+
+            if ($exception->getStatusCode() == 500) {
+                return response([
+                    'status' => 500,
+                    'message' => 'Internal Server Error'
+                ], 500);
+            }
+
+            if ($exception->getStatusCode() == 405) {
+                return response([
+                    'status' => 405,
+                    'message' => 'Unauthorized',
+                ], 405);
+            }
+        }
         return parent::render($request, $exception);
-        //return response([
-        //   'status' => 401,
-        //   'message' => 'Unauthorized',
-        //], 401);
     }
 }
