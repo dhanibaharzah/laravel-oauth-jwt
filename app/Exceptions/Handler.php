@@ -54,14 +54,18 @@ class Handler extends ExceptionHandler
             if ($exception->getStatusCode() == 404) {
                 return response([
                     'status' => 404,
-                    'message' => 'Not Found Exception'
+                    'message' => [
+                        'error' => 'Not Found Exception'
+                    ]
                 ], 404);
             }
 
             if ($exception->getStatusCode() == 500) {
                 return response([
                     'status' => 500,
-                    'message' => 'Internal Server Error'
+                    'message' => [
+                        'error' => 'Internal Server Error'
+                    ]
                 ], 500);
             }
 
