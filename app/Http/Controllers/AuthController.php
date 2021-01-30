@@ -55,9 +55,13 @@ class AuthController extends Controller
             ->grantPasswordToken(request('email'), request('password'));
 
         return response([
-            'token' => $resp->access_token,
-            'expiresIn' => $resp->expires_in,
-            'message' => 'You have been logged in',
+            'status' => 200,
+            'data' => [
+                'user' => $user->email,
+                'token' => $resp->access_token,
+                'expiresIn' => $resp->expires_in,
+                'message' => 'You have been logged in',
+            ]
         ], 200);
     }
 
