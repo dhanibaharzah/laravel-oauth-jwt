@@ -3,7 +3,7 @@
 
 Clone the project & setup the `.env` file
 ```sh
-$ git clone https://gitlab.com/dhanibaharzah/laravel-oauth-jwt.git
+$ git clone https://github.com/dhanibaharzah/laravel-oauth-jwt.git
 $ cp .env.example .env
 ```
 
