@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Utilities\ProxyRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Str;
 
 class AuthController extends Controller
 {
@@ -14,30 +17,40 @@ class AuthController extends Controller
         $this->proxy = $proxy;
     }
 
-    public function register()
+    public function register(Request $request)
     {
-        $this->validate(request(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:0', 'numeric'],
+            'role' => ['required', 'numeric']
         ]);
 
-        $user = User::create([
-            'name' => request('name'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password')),
-        ]);
+        if ($validator->fails()) {
+            return response([
+                'id' => Str::uuid(),
+                'status' => 400,
+                'message' => $validator->errors()->first(),
+            ], 400);
+        } else {
+            $user = User::create([
+                'name' => request('name'),
+                'email' => request('email'),
+                'password' => bcrypt(request('password')),
+                'role' => request('role'),
+            ]);
 
-        $resp = $this->proxy->grantPasswordToken(
-            $user->email,
-            request('password')
-        );
+            $resp = $this->proxy->grantPasswordToken(
+                $user->email,
+                request('password')
+            );
 
-        return response([
-            'token' => $resp->access_token,
-            'expiresIn' => $resp->expires_in,
-            'message' => 'Your account has been created',
-        ], 201);
+            return response([
+                'token' => $resp->access_token,
+                'expiresIn' => $resp->expires_in,
+                'message' => 'Your account has been created',
+            ], 201);
+        }
     }
 
     public function login()
