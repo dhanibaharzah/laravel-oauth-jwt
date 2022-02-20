@@ -10,6 +10,7 @@ $ cp .env.example .env
 Initialize the projects
 ```sh
 $ composer install
+$ php artisan make:command dbcreate <your env db name>
 $ php artisan key:generate
 $ php artisan migrate
 $ php artisan passport:install
@@ -18,10 +19,10 @@ $ php artisan passport:install
 After run the `php artisan passport:install` command. This command will create the encryption keys needed to generate secure access tokens. After you run this command you will see that "personal access" and "password grant" clients are created and you can see their Client ID and Client secret, those stored in `.env` file, if it's not stored automatically you can store it manually like the example below:
 ```sh
 PERSONAL_CLIENT_ID=1
-PERSONAL_CLIENT_SECRET={the secret}
+PERSONAL_CLIENT_SECRET=rFxb3j9dVw4RyLtY35sRo8tR1N9BPJtpVh1qkOOy
 
 PASSWORD_CLIENT_ID=2
-PASSWORD_CLIENT_SECRET={the secret}
+PASSWORD_CLIENT_SECRET=rlcvPsDRbTF23SR6UXVudyKvTZI4XMLh0dpghQ3Q
 ```
 
 Save the `.env` file then back to terminal to start the server
